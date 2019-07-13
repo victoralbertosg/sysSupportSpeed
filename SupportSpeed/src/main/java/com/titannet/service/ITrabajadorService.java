@@ -10,4 +10,6 @@ public interface ITrabajadorService {
 
 	public List<Trabajador> findAll();
 	public Page<Trabajador> findAll(Pageable pageable);
+	public void save(Trabajador trabajador);
+	public Trabajador findById(Long id);
 }

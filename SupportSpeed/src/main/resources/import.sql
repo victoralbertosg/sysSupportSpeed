@@ -1,5 +1,5 @@
 /* Populate tables */
-INSERT INTO trabajadores (nombre, apellido) VALUES('Andres', 'Guzman');
+INSERT INTO trabajadores (nombre, apellido) VALUES('Victor', 'Soto');
 INSERT INTO trabajadores (nombre, apellido) VALUES('Andres', 'Guzman');
 INSERT INTO trabajadores (nombre, apellido) VALUES('Andres', 'Guzman');
 INSERT INTO trabajadores (nombre, apellido) VALUES('Andres', 'Guzman');

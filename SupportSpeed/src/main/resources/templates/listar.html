@@ -16,8 +16,8 @@
 						<tr>
 							<th>id</th>
 							<th>nombre</th>
-							<th>apellido</th>							
-							<th>CREAR TAREA</th>
+							<th>apellido</th>				
+							
 							<th>EDITAR</th>
 							<th>ELIMINAR</th>
 						</tr>
@@ -27,7 +27,9 @@
 							<td><a class="btn btn-primary btn-xs"
 								th:href="@{/ver/}+${trabajador.Id}" th:text="${trabajador.Id}"></a></td>
 							<td th:text="${trabajador.nombre}"></td>
-							<td th:text="${trabajador.apellido}"></td>							
+							<td th:text="${trabajador.apellido}"></td>	
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{/form/}+${trabajador.id}" th:text="'editar'"></a></td>						
 						
 						</tr>
 					</tbody>

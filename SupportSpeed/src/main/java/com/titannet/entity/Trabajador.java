@@ -15,7 +15,6 @@ public class Trabajador implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-
 	private String Nombre;
 	private String Apellido;
 

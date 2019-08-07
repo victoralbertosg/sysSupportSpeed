@@ -47,4 +47,12 @@ public class TrabajadorServiceImp implements ITrabajadorService {
 		
 		
 	}
+
+
+	@Override
+	@Transactional
+	public void delete(Trabajador trabajador) {
+	trabajadorDao.delete(trabajador);
+		
+	}
 }

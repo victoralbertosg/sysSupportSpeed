@@ -8,6 +8,7 @@
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
 				<h4 class="card-title">
+				<input type=hidden id="urlCrear" th:value="@{/form}" />
 					<a th:href="@{/form}" class="btn btn-primary btn-xs">crear
 						trabajadores</a>
 				</h4>
@@ -30,7 +31,9 @@
 							<td th:text="${trabajador.apellido}"></td>	
 							<td><a class="btn btn-primary btn-xs"
 								th:href="@{/form/}+${trabajador.id}" th:text="'editar'"></a></td>						
-						
+						<td><a class="btn btn-danger btn-xs"
+								th:href="@{/delete/}+${trabajador.id}" th:text="'Eliminar'"
+								onclick="return confirm('estas seguro de eliminar?');"></a></td>
 						</tr>
 					</tbody>
 				</table>

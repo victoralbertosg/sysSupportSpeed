@@ -28,7 +28,7 @@
 								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
 						</div>
 					</div>
-					<input type="text" th:field="*{id}"  />
+					<input type=hidden th:field="*{id}"  />
 					<div class="form-group row">
 						<label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
 						<div class="col-sm-6">

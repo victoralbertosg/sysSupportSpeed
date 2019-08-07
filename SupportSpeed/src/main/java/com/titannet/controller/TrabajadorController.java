@@ -32,7 +32,7 @@ public class TrabajadorController {
 	@Autowired(required = true)
 	ITrabajadorService trabajadorService;
 
-	@RequestMapping(value = { "/listar", "/" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/listar" }, method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
 		PageRequest pageRequest = new PageRequest(page, 5);
@@ -90,6 +90,36 @@ public class TrabajadorController {
 		model.put("trabajador", trabajador);
 		model.put("titulo", "editar trabajador");
 		return "/trabajador/form";
-
+	}
+	@RequestMapping(value="delete/{id}")
+	public String delete (@PathVariable(value="id") Long id, RedirectAttributes flash) {
+		Trabajador trabajador = null;
+		if (id > 0) {
+			trabajador = trabajadorService.findById(id);
+			trabajadorService.delete(trabajador);
+			flash.addFlashAttribute("success", "Cliente eliminado con éxito!");
+			if (trabajador == null) {
+				flash.addFlashAttribute("error", "el ID no existe");
+				return "redirect:/listar";
+			}
+		} else {
+			flash.addFlashAttribute("error", "el ID del cliente no puede ser cero");
+			return "redirect:../listar";
+		}
+		
+		
+		return "redirect:../listar";
+	}
+	@GetMapping (value="ver/{id}") 
+	public String ver(@PathVariable(value="id")Long id, Model model, RedirectAttributes flash) {
+		if (id>0) {
+			Trabajador trabajador = trabajadorService.findById(id);
+			model.addAttribute("trabajador", trabajador);
+			model.addAttribute("titulo","Ver");
+		}else{
+			flash.addFlashAttribute("error", "el ID del cliente no puede ser cero");
+			return "redirect:../listar";
+		}
+		return "/trabajador/ver";
 	}
 }

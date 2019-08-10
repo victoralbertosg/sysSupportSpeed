@@ -48,7 +48,7 @@ public class TrabajadorController {
 
 	}
 
-	@GetMapping(value = "/unfv-supportspeed.herokuapp.com/form")
+	@GetMapping(value = "/form")
 	public String crear(Model model) {
 		Trabajador trabajador = new Trabajador();
 		model.addAttribute("trabajador", trabajador);

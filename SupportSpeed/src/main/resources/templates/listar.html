@@ -7,19 +7,27 @@
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
+<<<<<<< HEAD
 				<h4>prueba ruta actual</h4>
+=======
+
+>>>>>>> branch 'master' of https://github.com/victoralbertosg/sysSupportSpeed.git
 				<h4 class="card-title">
-				<input type=hidden id="urlCrear" th:value="@{/form}" />
 					<a th:href="@{/form}" class="btn btn-primary btn-xs">crear
 						trabajadores</a>
 				</h4>
+				<div th:text="@{/}" />
+
+				<div th:text="${#request.contextPath}" />
+				
+				<div>/your/context/</div>
 				<table class="table table-striped">
 					<thead>
 						<tr>
 							<th>id</th>
 							<th>nombre</th>
-							<th>apellido</th>				
-							
+							<th>apellido</th>
+
 							<th>EDITAR</th>
 							<th>ELIMINAR</th>
 						</tr>
@@ -29,10 +37,10 @@
 							<td><a class="btn btn-primary btn-xs"
 								th:href="@{/ver/}+${trabajador.Id}" th:text="${trabajador.Id}"></a></td>
 							<td th:text="${trabajador.nombre}"></td>
-							<td th:text="${trabajador.apellido}"></td>	
+							<td th:text="${trabajador.apellido}"></td>
 							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/form/}+${trabajador.id}" th:text="'editar'"></a></td>						
-						<td><a class="btn btn-danger btn-xs"
+								th:href="@{/form/}+${trabajador.id}" th:text="'editar'"></a></td>
+							<td><a class="btn btn-danger btn-xs"
 								th:href="@{/delete/}+${trabajador.id}" th:text="'Eliminar'"
 								onclick="return confirm('estas seguro de eliminar?');"></a></td>
 						</tr>

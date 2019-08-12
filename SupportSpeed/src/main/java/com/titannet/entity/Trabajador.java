@@ -1,12 +1,20 @@
 package com.titannet.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+
+
+
 import javax.persistence.Id;
+
+import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "trabajadores")
@@ -17,7 +25,13 @@ public class Trabajador implements Serializable {
 	private Long Id;
 	private String Nombre;
 	private String Apellido;
+	private Long dni;
+	
+	
+	@OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	private List<Servicio> listaserviciotrabajador;
 
+			
 	public Long getId() {
 		return Id;
 	}

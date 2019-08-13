@@ -24,7 +24,7 @@ public class ClienteNatural implements Serializable {
 	private Long dni;
 	private String direccion;
 	
-	@OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	@OneToMany( mappedBy = "clientenatural",fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
 	private List<Servicio> listaserviciocliente;
 	
 	

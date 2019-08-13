@@ -28,7 +28,7 @@ public class Trabajador implements Serializable {
 	private Long dni;
 	
 	
-	@OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	@OneToMany( mappedBy="trabajador",fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
 	private List<Servicio> listaserviciotrabajador;
 
 			

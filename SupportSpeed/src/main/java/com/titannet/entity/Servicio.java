@@ -30,28 +30,48 @@ public class Servicio implements Serializable{
 	private Long Id;
 	
 	@ManyToOne( fetch = FetchType.LAZY)
-	@JoinColumn(name="tiposervicio_id")
+	@JoinColumn(name="fk_tiposervicio")
 	private TipoServicio tiposervicio;
 	
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	@OneToMany(mappedBy = "servicio",fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
 	private List<ControlServicio> listacontrol;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="fk_estadoservicio")	
 	private EstadoServicio estadoservicio;
 	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="fk_cliente")
 	private ClienteNatural clientenatural;
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	
+	@JoinColumn(name="fk_trabajador")
 	private Trabajador trabajador;
 		
 	@Temporal(TemporalType.DATE)	
 	private Date fecha;
 	
 	
+	
+	
+	public Servicio(TipoServicio tiposervicio, 
+			EstadoServicio estadoservicio, ClienteNatural clientenatural, Trabajador trabajador, Date fecha) {		
+		this.tiposervicio = tiposervicio;		
+		this.estadoservicio = estadoservicio;
+		this.clientenatural = clientenatural;
+		this.trabajador = trabajador;
+		this.fecha = fecha;
+	}
+
+
+	public Servicio() {
+		super();
+	}
+
+
 	public Long getId() {
 		return Id;
 	}

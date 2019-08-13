@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,27 +22,28 @@ public class ControlServicio implements Serializable{
 	private Long Id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_servicio", nullable = false)
 	private Servicio servicio;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="fk_estadoservicio")
 	private EstadoServicio estadoservicio;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="fk_trabajador")
 	private Trabajador trabajadorCambio;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="fk_trabajador_a")
 	private Trabajador trabajadorAsignado;
 	
 	@Temporal(TemporalType.DATE)	
 	private Date fecha;
 	
-	
-	
+		
 	public Long getId() {
 		return Id;
 	}
-
-
 
 	public void setId(Long id) {
 		Id = id;

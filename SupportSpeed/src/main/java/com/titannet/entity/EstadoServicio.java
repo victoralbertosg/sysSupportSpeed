@@ -22,7 +22,7 @@ public class EstadoServicio implements Serializable {
 	private String estado;
 	private String descripcion;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	@OneToMany(mappedBy="estadoservicio", fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
 	private List<Servicio> listaservicioestado;
 	
 	

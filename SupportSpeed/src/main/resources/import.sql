@@ -50,3 +50,9 @@ INSERT INTO trabajadores (nombre, apellido) VALUES('Andres', 'Guzman');
 INSERT INTO trabajadores (nombre, apellido) VALUES('Andres', 'Guzman');
 INSERT INTO trabajadores (nombre, apellido) VALUES('Andres', 'Guzman');
 INSERT INTO trabajadores (nombre, apellido) VALUES('Andres', 'Guzman');
+
+
+INSERT INTO tiposervicios (descripcion) VALUES ('Soporte');
+INSERT INTO tiposervicios (descripcion) VALUES ('Mantenimiento de redes');
+INSERT INTO tiposervicios (descripcion) VALUES ('Monitoreo de Sistemas');
+

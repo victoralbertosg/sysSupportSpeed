@@ -3,6 +3,8 @@ package com.titannet.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,7 +37,7 @@ public class ServicioController {
 		model.addAttribute("servicio", servicio);
 		model.addAttribute("tipoServicios",tipoServicioService.findAll());	
 		model.addAttribute("titulo","Guardar");
-		
+	//	servicio.setEstadoservicio(1);
 		return "/servicio/form";
 	
 		
@@ -47,6 +49,31 @@ public class ServicioController {
 			model.addAttribute("titulo", "Formulario de Servicios");
 			return "formServicio";
 		}
+		
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+		
+				String nombre= auth.getName();
+				
+				/*
+				@Autowired
+				UsuarioService usuarioService;				
+				private Usuario usuario;
+
+				@PostConstruct
+				public void init() {
+				    Authentication auth = SecurityContextHolder
+				            .getContext()
+				            .getAuthentication();
+				    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				    usuario = this.usuarioService.getUsuarioByCorreo(userDetail.getUsername());
+				    System.out.println(usuario);
+				    System.out.println(usuario.getNombre());
+				}
+				*/
+				
+						
 		String mensajeFlash = (servicio.getId() != null) ? "Servicio editado con éxito!"
 				: "Servicio creado con éxito!";
 		

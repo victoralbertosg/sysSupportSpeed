@@ -17,14 +17,14 @@
 					</ul>
 				</div>
 
-				<form th:action="@{/form}" th:object="${servicio}" method="post"
+				<form th:action="@{/formServicio}" th:object="${servicio}" method="post"
 					enctype="multipart/form-data">
 					<div class="form-group row">
 						<label for="tipoServicio" class="col-sm-2 col-form-label">Tipo
 							de Servicio</label>
 						<div class="col-sm-6">
 							<select th:field="*{tiposervicio}" multiple="multiple">
-								<option th:each="ts :${tipoServicio}"
+								<option th:each="ts :${tipoServicios}"
 									th:value="${ts.Id}"
 									th:text="${ts.descripcion}"></option>
 							</select> <small class="form-text text-danger"

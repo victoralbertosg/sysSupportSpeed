@@ -31,8 +31,11 @@ public class ServicioController {
 	@GetMapping(value="/formServicio")
 	public String Crear(Model model) {
 		Servicio servicio=new Servicio();
+		
 		model.addAttribute("servicio", servicio);
-		model.addAttribute("tipoServicio",tipoServicioService.findAll());				
+		model.addAttribute("tipoServicios",tipoServicioService.findAll());	
+		model.addAttribute("titulo","Guardar");
+		
 		return "/servicio/form";
 	
 		
@@ -42,10 +45,12 @@ public class ServicioController {
 			SessionStatus status,Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de Servicios");
-			return "form";
+			return "formServicio";
 		}
 		String mensajeFlash = (servicio.getId() != null) ? "Servicio editado con éxito!"
 				: "Servicio creado con éxito!";
+		
+		
 		servicioService.save(servicio);
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);

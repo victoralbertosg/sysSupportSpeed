@@ -56,3 +56,7 @@ INSERT INTO tiposervicios (descripcion) VALUES ('Soporte');
 INSERT INTO tiposervicios (descripcion) VALUES ('Mantenimiento de redes');
 INSERT INTO tiposervicios (descripcion) VALUES ('Monitoreo de Sistemas');
 
+INSERT INTO estado_servicio (descripcion, estado) VALUES ('inicio servicio', 'nuevo');
+INSERT INTO estado_servicio (descripcion, estado) VALUES ('trabajo programado', 'asignado');
+INSERT INTO estado_servicio (descripcion, estado) VALUES ('conformidad cliente', 'completado');
+INSERT INTO estado_servicio (descripcion, estado) VALUES ('conformidad admin', 'cerrado');

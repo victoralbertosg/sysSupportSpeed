@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.titannet.dao.IServicioDao;
+import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Servicio;
+import com.titannet.entity.ServicioDto;
 
 @Service
 public class ServicioServiceImp implements IServicioService{
@@ -44,6 +46,12 @@ public class ServicioServiceImp implements IServicioService{
 	@Transactional
 	public void delete(Servicio servicio) {
 		servicioDao.delete(servicio);		
+	}
+
+	@Override
+	public List<Servicio> servicioEstado1(EstadoServicio es) {
+		// TODO Auto-generated method stub
+		return servicioDao.servicioEstado1(es);
 	}
 
 }

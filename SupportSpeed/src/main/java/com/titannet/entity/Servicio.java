@@ -58,7 +58,9 @@ public class Servicio implements Serializable{
 	@PrePersist
 	public void prePersist() {
 		fecha = new Date();
-	}
+		
+		}
+	
 	
 	
 	public Servicio(TipoServicio tiposervicio, 

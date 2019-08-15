@@ -1,5 +1,7 @@
 package com.titannet.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Servicio;
-import com.titannet.entity.Trabajador;
+import com.titannet.entity.ServicioDto;
+import com.titannet.service.IEstadoServicioService;
 import com.titannet.service.IServicioService;
 import com.titannet.service.ITipoServicioService;
 import com.titannet.service.ITrabajadorService;
@@ -28,12 +32,13 @@ public class ServicioController {
 	ITrabajadorService trabajadorService;
 	@Autowired
 	ITipoServicioService tipoServicioService;
-	
+	@Autowired
+	IEstadoServicioService estadoServicioService;
 	
 	@GetMapping(value="/formServicio")
 	public String Crear(Model model) {
-		Servicio servicio=new Servicio();
-		
+		Servicio servicio=new Servicio();		
+		servicio.setEstadoservicio(estadoServicioService.findById((long) 1));				
 		model.addAttribute("servicio", servicio);
 		model.addAttribute("tipoServicios",tipoServicioService.findAll());	
 		model.addAttribute("titulo","Guardar");
@@ -41,6 +46,14 @@ public class ServicioController {
 		return "/servicio/form";
 	
 		
+	}
+	@GetMapping(value="/listarEstado1")
+	public String listarE1(Model model) {
+		EstadoServicio es=estadoServicioService.findById((long) 1);
+		List<Servicio> s=servicioService.servicioEstado1(es);		
+		model.addAttribute("listaServicio",s);
+		
+		return "/servicio/listarE1";
 	}
 	@RequestMapping(value = "/formServicio", method = RequestMethod.POST)
 	public String guardar(@Valid Servicio servicio, BindingResult result, RedirectAttributes flash,
@@ -77,11 +90,14 @@ public class ServicioController {
 		String mensajeFlash = (servicio.getId() != null) ? "Servicio editado con éxito!"
 				: "Servicio creado con éxito!";
 		
-		
-		servicioService.save(servicio);
+		//List<EstadoServicio> es=estadoServicioService.findAll();
+		servicio.setEstadoservicio(estadoServicioService.findById((long) 1));		
+		servicioService.save(servicio);		
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
 		return "redirect:listar";
 	}
+	
+	
 	
 }

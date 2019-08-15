@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Servicio;
-import com.titannet.entity.Trabajador;
+import com.titannet.entity.ServicioDto;
+
 
 public interface IServicioService {
 	public List<Servicio> findAll();
@@ -14,4 +16,5 @@ public interface IServicioService {
 	public void save(Servicio servicio);
 	public Servicio findById(Long id);
 	public void delete(Servicio servicio);
+	public List<Servicio> servicioEstado1(EstadoServicio es);
 }

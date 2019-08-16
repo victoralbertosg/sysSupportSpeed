@@ -45,7 +45,7 @@ public class Servicio implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fk_cliente")
-	private ClienteNatural clientenatural;
+	private Cliente cliente;
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -61,18 +61,17 @@ public class Servicio implements Serializable{
 		
 		}
 	
-	
-	
-	public Servicio(TipoServicio tiposervicio, 
-			EstadoServicio estadoservicio, ClienteNatural clientenatural, Trabajador trabajador, Date fecha) {		
-		this.tiposervicio = tiposervicio;		
-		this.estadoservicio = estadoservicio;
-		this.clientenatural = clientenatural;
-		this.trabajador = trabajador;
-		this.fecha = fecha;
+	    
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-    
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
 	public Servicio() {
 		super();
 	}
@@ -117,15 +116,6 @@ public class Servicio implements Serializable{
 		this.estadoservicio = estadoservicio;
 	}
 
-
-	public ClienteNatural getClientenatural() {
-		return clientenatural;
-	}
-
-
-	public void setClientenatural(ClienteNatural clientenatural) {
-		this.clientenatural = clientenatural;
-	}
 
 
 	public Trabajador getTrabajador() {

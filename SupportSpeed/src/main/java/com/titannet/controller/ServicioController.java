@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,11 +19,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Servicio;
-import com.titannet.entity.ServicioDto;
+import com.titannet.entity.Usuario;
+import com.titannet.service.IClienteService;
 import com.titannet.service.IEstadoServicioService;
 import com.titannet.service.IServicioService;
 import com.titannet.service.ITipoServicioService;
 import com.titannet.service.ITrabajadorService;
+import com.titannet.service.IUsuarioService;
 
 @Controller
 public class ServicioController {
@@ -35,12 +38,21 @@ public class ServicioController {
 	@Autowired
 	IEstadoServicioService estadoServicioService;
 	
+	@Autowired
+	IClienteService clienteService;
+	
+	@Autowired
+	IUsuarioService usuarioService;
+	
+	
+	
 	@GetMapping(value="/formServicio")
 	public String Crear(Model model) {
 		Servicio servicio=new Servicio();		
 		servicio.setEstadoservicio(estadoServicioService.findById((long) 1));				
 		model.addAttribute("servicio", servicio);
-		model.addAttribute("tipoServicios",tipoServicioService.findAll());	
+		model.addAttribute("tipoServicios",tipoServicioService.findAll());
+		model.addAttribute("clientes",clienteService.findAll());
 		model.addAttribute("titulo","Guardar");
 	//	servicio.setEstadoservicio(1);
 		return "/servicio/form";
@@ -63,11 +75,7 @@ public class ServicioController {
 			return "formServicio";
 		}
 		
-		Authentication auth = SecurityContextHolder
-	            .getContext()
-	            .getAuthentication();
 		
-				String nombre= auth.getName();
 				
 				/*
 				@Autowired
@@ -89,7 +97,13 @@ public class ServicioController {
 						
 		String mensajeFlash = (servicio.getId() != null) ? "Servicio editado con éxito!"
 				: "Servicio creado con éxito!";
-		
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+				UserDetails userDetail = (UserDetails) auth.getPrincipal();
+				String u=userDetail.getUsername();
+				Usuario usu=usuarioService.findByUsername(u);
+				
 		//List<EstadoServicio> es=estadoServicioService.findAll();
 		servicio.setEstadoservicio(estadoServicioService.findById((long) 1));		
 		servicioService.save(servicio);		

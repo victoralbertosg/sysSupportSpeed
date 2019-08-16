@@ -10,34 +10,73 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "clientes")
-public class ClienteNatural implements Serializable {
+public class Persona implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
-	private String nombre;
+	private Long id;	
+	private String nombre;	
 	private String apellido;	
-	private Long dni;
+	private String dni;
 	private String direccion;
 	
-	@OneToMany( mappedBy = "clientenatural",fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
-	private List<Servicio> listaserviciocliente;
+	@OneToMany(mappedBy = "persona",fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	private List<Usuario> usuarios;
 	
+	@OneToMany(mappedBy = "persona",fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	private List<Cliente> clientes;
 	
+	@OneToMany(mappedBy = "persona",fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
+	private List<Trabajador> trabajador;
+		
 	
 	public Long getId() {
-		return Id;
+		return id;
 	}
+
+
+
+
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+
+
+
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+
+
+
+
+	public List<Trabajador> getTrabajador() {
+		return trabajador;
+	}
+
+
+
+
+
+	public void setTrabajador(List<Trabajador> trabajador) {
+		this.trabajador = trabajador;
+	}
+
+
 
 
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
+
+
 
 
 
@@ -47,9 +86,13 @@ public class ClienteNatural implements Serializable {
 
 
 
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
 
 
 
@@ -59,21 +102,29 @@ public class ClienteNatural implements Serializable {
 
 
 
+
+
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
 
 
 
-	public Long getDni() {
+
+
+	public String getDni() {
 		return dni;
 	}
 
 
 
-	public void setDni(Long dni) {
+
+
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
+
+
 
 
 
@@ -83,24 +134,33 @@ public class ClienteNatural implements Serializable {
 
 
 
+
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
 
 
-	public List<Servicio> getListaserviciocliente() {
-		return listaserviciocliente;
+
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
 
 
-	public void setListaserviciocliente(List<Servicio> listaserviciocliente) {
-		this.listaserviciocliente = listaserviciocliente;
+
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
+
+
 
 
 
 	private static final long serialVersionUID = 1L;
 
+	
 }

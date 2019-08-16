@@ -7,7 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Servicio;
-import com.titannet.entity.ServicioDto;
+
 
 public interface IServicioDao extends PagingAndSortingRepository<Servicio , Long> {
 

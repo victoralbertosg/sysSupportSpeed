@@ -31,16 +31,43 @@ public class ControlServicio implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fk_trabajador")
-	private Trabajador trabajadorCambio;
+	private Trabajador trabajador;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="fk_trabajador_a")
-	private Trabajador trabajadorAsignado;
+	@JoinColumn(name="fk_usuario")
+	private Usuario usuario;
+	
 	
 	@Temporal(TemporalType.DATE)	
 	private Date fecha;
 	
+	private String tipoCambio;
+	
 		
+	public Trabajador getTrabajador() {
+		return trabajador;
+	}
+
+	public void setTrabajador(Trabajador trabajador) {
+		this.trabajador = trabajador;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getTipoCambio() {
+		return tipoCambio;
+	}
+
+	public void setTipoCambio(String tipoCambio) {
+		this.tipoCambio = tipoCambio;
+	}
+
 	public Long getId() {
 		return Id;
 	}
@@ -75,27 +102,6 @@ public class ControlServicio implements Serializable{
 
 
 
-	public Trabajador getTrabajadorCambio() {
-		return trabajadorCambio;
-	}
-
-
-
-	public void setTrabajadorCambio(Trabajador trabajadorCambio) {
-		this.trabajadorCambio = trabajadorCambio;
-	}
-
-
-
-	public Trabajador getTrabajadorAsignado() {
-		return trabajadorAsignado;
-	}
-
-
-
-	public void setTrabajadorAsignado(Trabajador trabajadorAsignado) {
-		this.trabajadorAsignado = trabajadorAsignado;
-	}
 
 
 

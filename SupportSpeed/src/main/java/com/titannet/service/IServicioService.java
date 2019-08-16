@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Servicio;
-import com.titannet.entity.ServicioDto;
+
 
 
 public interface IServicioService {

@@ -31,8 +31,8 @@ INSERT INTO `bddsupport`.`clientes` (`direccion`, `razonsocial`, `rubro`) VALUES
 INSERT INTO `bddsupport`.`clientes` (`direccion`, `razonsocial`, `rubro`) VALUES ('Cercado', 'Clinica internacional', 'Salu');
 
 /* Creamos algunos usuarios con sus roles */
-INSERT INTO `usuarios` (username, password, enabled) VALUES ('victor','$2a$10$O9wxmH/AeyZZzIS09Wp8YOEMvFnbRVJ8B4dmAMVSGloR62lj.yqXG',1);
-INSERT INTO `usuarios` (username, password, enabled) VALUES ('admin','$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS',1);
+INSERT INTO `usuarios` (username, password, enabled,fk_persona) VALUES ('victor','$2a$10$O9wxmH/AeyZZzIS09Wp8YOEMvFnbRVJ8B4dmAMVSGloR62lj.yqXG',1,1);
+INSERT INTO `usuarios` (username, password, enabled,fk_persona) VALUES ('admin','$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS',1,2);
 
 INSERT INTO `roles` (fk_usuario, authority) VALUES (1,'ROLE_USER');
 INSERT INTO `roles` (fk_usuario, authority) VALUES (2,'ROLE_ADMIN');

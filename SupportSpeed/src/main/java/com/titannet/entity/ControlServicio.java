@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,9 +42,14 @@ public class ControlServicio implements Serializable{
 	@Temporal(TemporalType.DATE)	
 	private Date fecha;
 	
+	
 	private String tipoCambio;
 	
-		
+	@PrePersist
+	public void prePersist() {
+		fecha = new Date();		
+		}
+	
 	public Trabajador getTrabajador() {
 		return trabajador;
 	}
@@ -101,10 +107,6 @@ public class ControlServicio implements Serializable{
 	}
 
 
-
-
-
-
 	public Date getFecha() {
 		return fecha;
 	}
@@ -113,6 +115,26 @@ public class ControlServicio implements Serializable{
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+
+
+	public ControlServicio(Long id, Servicio servicio, EstadoServicio estadoservicio, Trabajador trabajador,
+			Usuario usuario, Date fecha, String tipoCambio) {
+		super();
+		Id = id;
+		this.servicio = servicio;
+		this.estadoservicio = estadoservicio;
+		this.trabajador = trabajador;
+		this.usuario = usuario;
+		this.fecha = fecha;
+		this.tipoCambio = tipoCambio;
+	}
+
+
+
+	public ControlServicio() {
+		super();
 	}
 
 

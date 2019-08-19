@@ -1,6 +1,7 @@
 package com.titannet.controller;
 
 import java.awt.print.Pageable;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -12,7 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import com.titannet.entity.Cargo;
+import com.titannet.entity.Persona;
 import com.titannet.entity.Trabajador;
+import com.titannet.service.ICargoService;
+import com.titannet.service.IPersonaService;
 import com.titannet.service.ITrabajadorService;
 import com.titannet.util.paginator.PageRender;
 
@@ -31,16 +36,17 @@ public class TrabajadorController {
 
 	@Autowired(required = true)
 	ITrabajadorService trabajadorService;
+	@Autowired
+	IPersonaService personaService;
+	@Autowired
+	ICargoService cargoService;
 
 	@RequestMapping(value = { "/listar" }, method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
 		PageRequest pageRequest = new PageRequest(page, 5);
-
 		Page<Trabajador> trabajadores = trabajadorService.findAll(pageRequest);
-
 		PageRender<Trabajador> pageRender = new PageRender<Trabajador>("/listar", trabajadores);
-
 		model.addAttribute("titulo", "Listado de Trabajadores");
 		model.addAttribute("trabajadores", trabajadores);
 		model.addAttribute("page", pageRender);
@@ -51,7 +57,11 @@ public class TrabajadorController {
 	@GetMapping(value = "/form")
 	public String crear(Model model) {
 		Trabajador trabajador = new Trabajador();
+		List<Persona> personas=personaService.findAll();
+		List<Cargo> cargos= cargoService.findAll();
 		model.addAttribute("trabajador", trabajador);
+		model.addAttribute("personas", personas);
+		model.addAttribute("cargos", cargos);
 		model.addAttribute("titulo", "Crear Trabajador");
 		return "/trabajador/form";
 	}
@@ -77,8 +87,7 @@ public class TrabajadorController {
 		Trabajador trabajador = null;
 
 		if (id > 0) {
-			trabajador = trabajadorService.findById(id);
-
+			trabajador = trabajadorService.findById(id);			
 			if (trabajador == null) {
 				flash.addFlashAttribute("error", "el ID no existe");
 				return "redirect:/listar";
@@ -87,8 +96,11 @@ public class TrabajadorController {
 			flash.addFlashAttribute("error", "el ID del cliente no puede ser cero");
 			return "redirect:/listar";
 		}
-
+		List<Persona> personas=personaService.findAll();
+		List<Cargo> cargos= cargoService.findAll();
 		model.put("trabajador", trabajador);
+		model.put("personas",personas);
+		model.put("cargos", cargos);
 		model.put("titulo", "editar trabajador");
 		return "/trabajador/form";
 	}

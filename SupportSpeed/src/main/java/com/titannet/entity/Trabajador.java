@@ -24,8 +24,7 @@ public class Trabajador implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fk_persona")
-	private Persona persona;
-	
+	private Persona persona;	
 	
 	private Date Fecha_inicio;	
 	@OneToMany( mappedBy="trabajador",fetch = FetchType.LAZY, cascade = CascadeType.ALL)	

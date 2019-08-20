@@ -33,6 +33,7 @@ import com.titannet.service.IServicioService;
 import com.titannet.service.ITipoServicioService;
 import com.titannet.service.ITrabajadorService;
 import com.titannet.service.IUsuarioService;
+import com.titannet.service.ObtUsuarioService;
 
 @Controller
 public class ServicioController {
@@ -50,23 +51,23 @@ public class ServicioController {
 
 	@Autowired
 	IUsuarioService usuarioService;
+	@Autowired
+	ObtUsuarioService obtusuario;
 
 	@Autowired
 	IControlServicioService controlService;
-	public String n;
+//public Integer tc; //tipo de cambio 1:crear 2:asignar personal 3: conformidad cliene 4;conformidad administrador
 	public EstadoServicio esServicio;
 
 	@GetMapping(value = "/formServicio")
 	public String Crear(Model model) {
-		Servicio servicio = new Servicio();
-		servicio.setEstadoservicio(estadoServicioService.findById((long) 1));
-		//n="nuevo";
-		//esServicio=estadoServicioService.findById((long) 1);
+		Servicio servicio = new Servicio();			
+		obtusuario.setTc(1); //se agrega el valor de 1 al tipo de cambio q corresponde a crear
+		obtusuario.setDcambio("Se crea la solicitud del servicio"); //se agrega la desc de cambio 
 		model.addAttribute("servicio", servicio);
 		model.addAttribute("tipoServicios", tipoServicioService.findAll());
 		model.addAttribute("clientes", clienteService.findAll());
-		model.addAttribute("titulo", "Guardar");
-		// servicio.setEstadoservicio(1);
+		model.addAttribute("titulo", "Guardar");	
 		return "/servicio/form";
 	}
 
@@ -85,52 +86,21 @@ public class ServicioController {
 			model.addAttribute("titulo", "Formulario de Servicios");
 			return "formServicio";
 		}
-		String mensajeFlash = (servicio.getId() != null) ? "Servicio editado con éxito!" : "Servicio creado con éxito!";	
-		// obtener el usuario de autenticado
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails userDetail = (UserDetails) auth.getPrincipal();
-		String u = userDetail.getUsername();
-		Usuario usu = usuarioService.findByUsername(u);
-		
-		//EstadoServicio esNuevo=estadoServicioService.findById((long) 1);
-		//if (n=="nuevo"){
-			//servicio.setEstadoservicio(esServicio);	
-		//}		
-					
+		String mensajeFlash = (servicio.getId() != null) ? "Servicio editado con éxito!" : "Servicio creado con éxito!";								
+		esServicio=estadoServicioService.findById((long) obtusuario.getTc()); //se ubica el estado del servicio por el tipo de cambio			
+									
+		servicio.setEstadoservicio(esServicio);
 		servicioService.save(servicio);
 		//actualizar control servicio
 		ControlServicio cs = new ControlServicio();
-		cs.setUsuario(usu);
+		cs.setUsuario(obtusuario.obtUsuario());
 		cs.setEstadoservicio(esServicio);
 		cs.setServicio(servicio);
-		controlService.save(cs);
-		
+		cs.setDescripcion(obtusuario.getDcambio());
+		cs.setTipoCambio((long)obtusuario.getTc());
+		controlService.save(cs);		
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
 		return "redirect:listar";
 	}
-	
-	@RequestMapping(value = "formControlServicio/{id}")
-	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
-		Trabajador trabajador = null;
-
-		if (id > 0) {
-			trabajador = trabajadorService.findById(id);			
-			if (trabajador == null) {
-				flash.addFlashAttribute("error", "el ID no existe");
-				return "redirect:/listar";
-			}
-		} else {
-			flash.addFlashAttribute("error", "el ID del cliente no puede ser cero");
-			return "redirect:/listar";
-		}
-		//List<Persona> personas=personaService.findAll();
-		//List<Cargo> cargos= cargoService.findAll();
-		//model.put("trabajador", trabajador);
-		//model.put("personas",personas);
-	//	model.put("cargos", cargos);
-		//model.put("titulo", "editar trabajador");
-		return "/trabajador/form";
-	}
-
 }

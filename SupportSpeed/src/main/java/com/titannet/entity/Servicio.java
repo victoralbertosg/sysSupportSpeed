@@ -55,6 +55,8 @@ public class Servicio implements Serializable{
 	@Temporal(TemporalType.DATE)	
 	private Date fecha;
 	
+	private String descripcion;
+	
 	@PrePersist
 	public void prePersist() {
 		fecha = new Date();
@@ -135,6 +137,16 @@ public class Servicio implements Serializable{
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 

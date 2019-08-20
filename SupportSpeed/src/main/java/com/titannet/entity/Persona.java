@@ -37,39 +37,23 @@ public class Persona implements Serializable{
 	}
 
 
-
-
-
 	public List<Cliente> getClientes() {
 		return clientes;
 	}
-
-
-
 
 
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
 
-
-
-
-
 	public List<Trabajador> getTrabajador() {
 		return trabajador;
 	}
 
 
-
-
-
 	public void setTrabajador(List<Trabajador> trabajador) {
 		this.trabajador = trabajador;
 	}
-
-
-
 
 
 	public void setId(Long id) {

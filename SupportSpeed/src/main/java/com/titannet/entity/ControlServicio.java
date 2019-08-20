@@ -42,8 +42,9 @@ public class ControlServicio implements Serializable{
 	@Temporal(TemporalType.DATE)	
 	private Date fecha;
 	
+	private Long tipoCambio;	
+	private String descripcion;
 	
-	private String tipoCambio;
 	
 	@PrePersist
 	public void prePersist() {
@@ -66,13 +67,7 @@ public class ControlServicio implements Serializable{
 		this.usuario = usuario;
 	}
 
-	public String getTipoCambio() {
-		return tipoCambio;
-	}
 
-	public void setTipoCambio(String tipoCambio) {
-		this.tipoCambio = tipoCambio;
-	}
 
 	public Long getId() {
 		return Id;
@@ -119,8 +114,24 @@ public class ControlServicio implements Serializable{
 
 
 
+	public Long getTipoCambio() {
+		return tipoCambio;
+	}
+
+	public void setTipoCambio(Long tipoCambio) {
+		this.tipoCambio = tipoCambio;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	public ControlServicio(Long id, Servicio servicio, EstadoServicio estadoservicio, Trabajador trabajador,
-			Usuario usuario, Date fecha, String tipoCambio) {
+			Usuario usuario, Date fecha, Long tipoCambio) {
 		super();
 		Id = id;
 		this.servicio = servicio;

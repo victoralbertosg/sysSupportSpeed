@@ -39,7 +39,7 @@ INSERT INTO `roles` (fk_usuario, authority) VALUES (2,'ROLE_ADMIN');
 INSERT INTO `roles` (fk_usuario, authority) VALUES (2,'ROLE_USER');
 
 
-INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`) VALUES ('2019-08-16', '1', '1');
-INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`) VALUES ('2019-08-16', '2', '2');
-INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`) VALUES ('2019-08-16', '1', '2');
-INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`) VALUES ('2019-08-16', '3', '1');
+INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`, `fk_cliente`) VALUES ('2019-08-16', '1', '1','2');
+INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`, `fk_cliente`) VALUES ('2019-08-16', '2', '2','1');
+INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`, `fk_cliente`) VALUES ('2019-08-16', '1', '2','3');
+INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`, `fk_cliente`) VALUES ('2019-08-16', '3', '1','1');

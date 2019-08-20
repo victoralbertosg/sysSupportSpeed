@@ -22,9 +22,9 @@
 					<thead>
 						<tr>
 							<th>id</th>
+							<th>cliente</th>
 							<th>descripcion</th>
 							<th>estado</th>
-
 							<th>EDITAR</th>
 							<th>ELIMINAR</th>
 						</tr>
@@ -34,6 +34,7 @@
 							<td><a class="btn btn-primary btn-xs"
 								th:href="@{/ver/}+${servicio.id}" th:text="${servicio.Id}"></a></td>
 							<td th:text="${servicio.tiposervicio.descripcion}"></td>
+							<td th:text="${servicio.cliente.razonsocial}"></td>
 							<td th:text="${servicio.estadoservicio.descripcion}"></td>
 							<td><a class="btn btn-primary btn-xs"
 								th:href="@{/form/}+${servicio.id}" th:text="'Asignar Personal'"></a></td>

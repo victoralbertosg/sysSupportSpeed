@@ -37,7 +37,7 @@
 							<td th:text="${servicio.cliente.razonsocial}"></td>
 							<td th:text="${servicio.estadoservicio.descripcion}"></td>
 							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/form/}+${servicio.id}" th:text="'Asignar Personal'"></a></td>
+								th:href="@{/formCServicio/}+${servicio.id}+'/2'" th:text="${submint}"></a></td>
 							<td><a class="btn btn-danger btn-xs"
 								th:href="@{/delete/}+${servicio.id}" th:text="'Eliminar'"
 								onclick="return confirm('estas seguro de eliminar?');"></a></td>

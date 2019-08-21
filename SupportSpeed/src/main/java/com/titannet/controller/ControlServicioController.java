@@ -17,6 +17,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.titannet.entity.ControlServicio;
+import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Servicio;
 import com.titannet.entity.Trabajador;
 import com.titannet.service.IClienteService;
@@ -26,6 +27,7 @@ import com.titannet.service.IServicioService;
 import com.titannet.service.ITipoServicioService;
 import com.titannet.service.ITrabajadorService;
 import com.titannet.service.IUsuarioService;
+import com.titannet.service.ObtVariosService;
 
 @Controller
 public class ControlServicioController {
@@ -46,12 +48,15 @@ public class ControlServicioController {
 
 	@Autowired
 	IControlServicioService controlService;
+	@Autowired
+	ObtVariosService obtVarios;
 	
+	Servicio servicio = null;
 	
-	@GetMapping(value = "formCServicio/{id}")
-	public String Crear(@PathVariable(value = "id") Long id,Model model,RedirectAttributes flash) {
+	@GetMapping(value = "formCServicio/{id}/{parEstadoServicio}")
+	public String Crear(@PathVariable(value = "id") Long id,@PathVariable(value = "parEstadoServicio") Long parEstadoServicio,Model model,RedirectAttributes flash) {
 		ControlServicio cservicio = new ControlServicio();
-		Servicio servicio = null;
+		obtVarios.setEstadoServicio(parEstadoServicio);
 		if (id > 0) {
 			servicio = servicioService.findById(id);			
 			if (servicio == null) {
@@ -62,23 +67,37 @@ public class ControlServicioController {
 			flash.addFlashAttribute("error", "el ID del servicio no puede ser cero");
 			return "redirect:/listarE1";
 		}
+		
 		cservicio.setServicio(servicio);			
 		model.addAttribute("miservicio", servicio);
 		model.addAttribute("cservicio", cservicio);		
 		model.addAttribute("trabajadores", trabajadorService.findAll());
-		model.addAttribute("titulo", "Guardar");
+		model.addAttribute("titulo", "Mantenimiento Control de Servicio");
 		// servicio.setEstadoservicio(1);
 		return "/controlServicio/form";
 	}
-	@RequestMapping(value = "/formCServicio}", method = RequestMethod.POST)
+	@RequestMapping(value = "/formCServicio", method = RequestMethod.POST)
 	public String guardar(@Valid ControlServicio cservicio, BindingResult result, RedirectAttributes flash,
 			SessionStatus status, Model model) {
 		
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de Servicios");
-			String d =cservicio.getDescripcion();
+			//String d =cservicio.getDescripcion();
 			return "formCServicio";
 		}
+		//completar los datos de control de usuario
+		cservicio.setUsuario(obtVarios.obtUsuario());
+		cservicio.setLogCambio("se asigna la tarea al personal: " + cservicio.getTrabajador().getPersona().getNombre());
+		cservicio.setServicio(servicio);			
+		cservicio.setEstadoservicio(obtVarios.obtEstadoServicio(obtVarios.getEstadoServicio()));		
+		
+		controlService.save(cservicio);//grabar el registro
+		//actualizar estado y trabajador actual del servicio
+		servicio.setEstadoservicio(obtVarios.obtEstadoServicio(obtVarios.getEstadoServicio())); //la propiedad estadoservicio se guarda en crear
+		servicio.setTrabajador(cservicio.getTrabajador());
+		servicioService.save(servicio);
+		
+		
 		
 		String mensajeFlash = (cservicio.getId() != null) ? "Servicio editado con éxito!" : "Servicio creado con éxito!";								
 	//	esServicio=estadoServicioService.findById((long) obtusuario.getTc()); //se ubica el estado del servicio por el tipo de cambio			
@@ -95,7 +114,7 @@ public class ControlServicioController {
 		//controlService.save(cs);		
 		//status.setComplete();
 		//flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:listar";
+		return "redirect:/listarEstado/"+obtVarios.getEstadoServicio();
 	}
 	
 	@RequestMapping(value = "formControlServicio/{id}")

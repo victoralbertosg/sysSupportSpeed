@@ -78,8 +78,7 @@ public class TrabajadorController {
 		trabajadorService.save(trabajador);
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:listar";
-	
+		return "redirect:listar";	
 	}
 
 	@RequestMapping(value = "form/{id}")

@@ -2,8 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
 <meta charset="UTF-8" />
-<title
-	th:text="'Sistema de administración de servicios - ' + ${titulo}"></title>
+<title th:text="'Sistema de administración de servicios - ' + ${titulo}"></title>
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
 </head>
@@ -24,6 +23,22 @@
 					<li class="nav-item"><a class="nav-link" th:href="@{/listar}">Trabajadores</a>
 					</li>
 				</ul>
+
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Administracion de Servicios </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/formServicio/1}">Crear Servicio</a> 
+						<a class="dropdown-item" th:href="@{/listarEstado/1}">Asignar Trabajador</a>
+						<a class="dropdown-item" th:href="@{/listarEstado/2}">Informe de servicio Trabajador</a>
+						<a class="dropdown-item" th:href="@{/listarEstado/3}">Conformidad del cliente</a>
+						<a class="dropdown-item" th:href="@{/listarEstado/4}">Conformidad del administrador</a>							
+						<a class="dropdown-item" th:href="@{/listarEstado/5}">Historial Servicios</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Something else here</a>
+					</div>
+				</li>
 				<ul class="navbar-nav navbar-right">
 					<li sec:authorize="!isAuthenticated()"><a
 						class="btn btn-outline-primary" th:href="@{/login}">Sign In</a></li>
@@ -67,7 +82,6 @@
 		</p>
 		<p>
 			Desarrollado: TeamSpeedUNFV <a SpeedTeam>
-				
 		</p>
 
 		<!-- Optional JavaScript -->

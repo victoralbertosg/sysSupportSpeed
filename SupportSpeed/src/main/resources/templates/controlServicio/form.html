@@ -49,7 +49,8 @@
 							th:errors="*{miservicio.fecha}"></small>
 					</div>
 				</div>
-				<form th:action="@{/formCServicio}" th:object="${cservicio}"
+
+				<form th:action="@{/formCServicio}" th:object="${cservicio}" 
 					method="post" enctype="multipart/form-data">
 
 					<div class="form-group row">
@@ -64,7 +65,16 @@
 								th:errors="*{trabajador}"></small>
 						</div>
 					</div>
-
+				<div class="form-group row">
+					<label for="Descripcion" class="col-sm-2 col-form-label">Detalle de cambio</label>
+					<div class="col-sm-6">
+						<input type="text" th:field="*{descripcion}"
+							class="form-control" th:errorclass="'form-control alert-danger'" />
+						<small class="form-text text-danger"
+							th:if="${#fields.hasErrors('descripcion')}"
+							th:errors="*{descripcion}"></small>
+					</div>
+				</div>
 
 					<div class="form-group row">
 						<div class="col-sm-6">

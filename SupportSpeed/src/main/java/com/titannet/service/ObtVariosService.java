@@ -6,14 +6,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Usuario;
 
 @Service
-public class ObtUsuarioService {	
+public class ObtVariosService {	
 	@Autowired
 	IUsuarioService usuarioService;
-	private Integer tc;	
-	private String dcambio;
+	@Autowired
+	IEstadoServicioService estadoServicioService;
+	private Long estadoServicio;	
+	private String logCambio;
 	public Usuario obtUsuario() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetail = (UserDetails) auth.getPrincipal();
@@ -21,18 +24,25 @@ public class ObtUsuarioService {
 		Usuario usu = usuarioService.findByUsername(u);		
 		return usu;
 	}
-	public Integer getTc() {
-		return tc;
-	}
-	public void setTc(Integer tc) {
-		this.tc = tc;
-	}
-	public String getDcambio() {
-		return dcambio;
-	}
-	public void setDcambio(String dcambio) {
-		this.dcambio = dcambio;
+	public EstadoServicio obtEstadoServicio(Long Id) {		
+		return estadoServicioService.findById(Id);
 	}
 	
+	
+
+
+	public Long getEstadoServicio() {
+		return estadoServicio;
+	}
+	public void setEstadoServicio(Long estadoServicio) {
+		this.estadoServicio = estadoServicio;
+	}
+	public String getLogCambio() {
+		return logCambio;
+	}
+	public void setLogCambio(String logCambio) {
+		this.logCambio = logCambio;
+	}
+
 	
 }

@@ -42,7 +42,7 @@ public class ControlServicio implements Serializable{
 	@Temporal(TemporalType.DATE)	
 	private Date fecha;
 	
-	private Long tipoCambio;	
+	private String logCambio;	
 	private String descripcion;
 	
 	
@@ -114,13 +114,7 @@ public class ControlServicio implements Serializable{
 
 
 
-	public Long getTipoCambio() {
-		return tipoCambio;
-	}
-
-	public void setTipoCambio(Long tipoCambio) {
-		this.tipoCambio = tipoCambio;
-	}
+	
 
 	public String getDescripcion() {
 		return descripcion;
@@ -130,19 +124,14 @@ public class ControlServicio implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public ControlServicio(Long id, Servicio servicio, EstadoServicio estadoservicio, Trabajador trabajador,
-			Usuario usuario, Date fecha, Long tipoCambio) {
-		super();
-		Id = id;
-		this.servicio = servicio;
-		this.estadoservicio = estadoservicio;
-		this.trabajador = trabajador;
-		this.usuario = usuario;
-		this.fecha = fecha;
-		this.tipoCambio = tipoCambio;
+
+	public String getLogCambio() {
+		return logCambio;
 	}
 
-
+	public void setLogCambio(String logCambio) {
+		this.logCambio = logCambio;
+	}
 
 	public ControlServicio() {
 		super();

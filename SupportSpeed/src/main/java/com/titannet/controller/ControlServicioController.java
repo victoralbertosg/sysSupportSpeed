@@ -1,6 +1,6 @@
 package com.titannet.controller;
 
-import java.util.List;
+
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.titannet.entity.ControlServicio;
 import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Servicio;
-import com.titannet.entity.Trabajador;
 import com.titannet.service.IClienteService;
 import com.titannet.service.IControlServicioService;
 import com.titannet.service.IEstadoServicioService;
@@ -57,6 +55,7 @@ public class ControlServicioController {
 	public String Crear(@PathVariable(value = "id") Long id,@PathVariable(value = "parEstadoServicio") Long parEstadoServicio,Model model,RedirectAttributes flash) {
 		ControlServicio cservicio = new ControlServicio();
 		obtVarios.setEstadoServicio(parEstadoServicio);
+		
 		if (id > 0) {
 			servicio = servicioService.findById(id);			
 			if (servicio == null) {
@@ -69,6 +68,7 @@ public class ControlServicioController {
 		}
 		
 		cservicio.setServicio(servicio);			
+		model.addAttribute("parES",1);
 		model.addAttribute("miservicio", servicio);
 		model.addAttribute("cservicio", cservicio);		
 		model.addAttribute("trabajadores", trabajadorService.findAll());
@@ -87,14 +87,17 @@ public class ControlServicioController {
 		}
 		//completar los datos de control de usuario
 		cservicio.setUsuario(obtVarios.obtUsuario());
-		cservicio.setLogCambio("se asigna la tarea al personal: " + cservicio.getTrabajador().getPersona().getNombre());
-		cservicio.setServicio(servicio);			
-		cservicio.setEstadoservicio(obtVarios.obtEstadoServicio(obtVarios.getEstadoServicio()));		
+		EstadoServicio es=obtVarios.obtEstadoServicio(obtVarios.getEstadoServicio());//estado de servicio
+		cservicio.setLogCambio(es.getDescripcion() + cservicio.getTrabajador().getPersona().getNombre());
+		cservicio.setServicio(servicio);
+		if (obtVarios.getEstadoServicio()!=1){cservicio.setTrabajador(servicio.getTrabajador());}
+				
 		
 		controlService.save(cservicio);//grabar el registro
 		//actualizar estado y trabajador actual del servicio
 		servicio.setEstadoservicio(obtVarios.obtEstadoServicio(obtVarios.getEstadoServicio())); //la propiedad estadoservicio se guarda en crear
-		servicio.setTrabajador(cservicio.getTrabajador());
+		if (obtVarios.getEstadoServicio()==1) {servicio.setTrabajador(cservicio.getTrabajador());}
+		cservicio.setEstadoservicio(es);
 		servicioService.save(servicio);
 		
 		

@@ -14,6 +14,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table (name="controlservicio")
@@ -31,7 +32,7 @@ public class ControlServicio implements Serializable{
 	private EstadoServicio estadoservicio;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="fk_trabajador")
+	@JoinColumn(name="fk_trabajador")	
 	private Trabajador trabajador;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

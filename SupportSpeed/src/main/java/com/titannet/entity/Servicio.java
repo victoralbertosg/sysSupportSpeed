@@ -16,8 +16,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-
+import javax.validation.constraints.NotEmpty;
 
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class Servicio implements Serializable{
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="fk_cliente")
+	@JoinColumn(name="fk_cliente")	
 	private Cliente cliente;
 	
 	
@@ -55,6 +54,7 @@ public class Servicio implements Serializable{
 	@Temporal(TemporalType.DATE)	
 	private Date fecha;
 	
+	@NotEmpty
 	private String descripcion;
 	
 	@PrePersist

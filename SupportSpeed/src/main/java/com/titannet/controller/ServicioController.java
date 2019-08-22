@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -58,7 +61,9 @@ public class ServicioController {
 	IControlServicioService controlService;
 //public Integer tc; //tipo de cambio 1:crear 2:asignar personal 3: conformidad cliene 4;conformidad administrador
 	public EstadoServicio esServicio;
-
+	
+	//@PreAuthorize(value = "hasRole('ROLE_ADMIN';'ROLE_CLIENTE')")
+	//@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENTE')")
 	@GetMapping(value = "/formServicio/{parEstadoServicio}")
 	public String Crear(Model model,@PathVariable(value = "parEstadoServicio") Long parEstadoServicio) {
 		Servicio servicio = new Servicio();			
@@ -67,12 +72,15 @@ public class ServicioController {
 		model.addAttribute("servicio", servicio);
 		model.addAttribute("tipoServicios", tipoServicioService.findAll());
 		model.addAttribute("clientes", clienteService.findAll());
-		model.addAttribute("titulo", "Guardar");	
+		model.addAttribute("titulo", "Formulario Servicio");	
 		return "/servicio/form";
 	}
 
 	@GetMapping(value = "/listarEstado/{parEstadoServicio}")
+				
 	public String listarE1(Model model,@PathVariable(value = "parEstadoServicio") Long parEstadoServicio ) {
+		
+		
 		EstadoServicio estadoservicio = estadoServicioService.findById(parEstadoServicio);
 		List<Servicio> servicio = servicioService.servicioEstado1(estadoservicio);
 		
@@ -90,6 +98,7 @@ public class ServicioController {
 		}
 		model.addAttribute("listaServicio", servicio);
 		model.addAttribute("submint", submint);
+		model.addAttribute("parEstadoServicio", parEstadoServicio);
 				
 		return "/servicio/listarE1";
 	}
@@ -111,12 +120,12 @@ public class ServicioController {
 		cs.setUsuario(obtVarios.obtUsuario());
 		cs.setEstadoservicio(esServicio);
 		cs.setServicio(servicio);
+		cs.setDescripcion(servicio.getDescripcion());
 		cs.setLogCambio(obtVarios.getLogCambio());		
 		controlService.save(cs);		
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:/listarEstado/"+obtVarios.getEstadoServicio();
-		
+		return "redirect:/listarEstado/"+obtVarios.getEstadoServicio();		
 	}
 	
 }

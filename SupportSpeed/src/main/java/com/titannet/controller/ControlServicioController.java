@@ -68,7 +68,7 @@ public class ControlServicioController {
 		}
 		
 		cservicio.setServicio(servicio);			
-		model.addAttribute("parES",1);
+		model.addAttribute("parES",servicio.getEstadoservicio().getEstado());
 		model.addAttribute("miservicio", servicio);
 		model.addAttribute("cservicio", cservicio);		
 		model.addAttribute("trabajadores", trabajadorService.findAll());
@@ -87,21 +87,21 @@ public class ControlServicioController {
 		}
 		//completar los datos de control de usuario
 		cservicio.setUsuario(obtVarios.obtUsuario());
-		EstadoServicio es=obtVarios.obtEstadoServicio(obtVarios.getEstadoServicio());//estado de servicio
-		cservicio.setLogCambio(es.getDescripcion() + cservicio.getTrabajador().getPersona().getNombre());
+		
+		EstadoServicio eServicioActual=obtVarios.obtEstadoServicio(obtVarios.getEstadoServicio()+1);//estado de servicio
+		cservicio.setLogCambio(eServicioActual.getDescripcion() );
 		cservicio.setServicio(servicio);
-		if (obtVarios.getEstadoServicio()!=1){cservicio.setTrabajador(servicio.getTrabajador());}
-				
-		
-		controlService.save(cservicio);//grabar el registro
+		cservicio.setEstadoservicio(eServicioActual); //se asigna el nuevo estado  (estado inicial+1)
 		//actualizar estado y trabajador actual del servicio
-		servicio.setEstadoservicio(obtVarios.obtEstadoServicio(obtVarios.getEstadoServicio())); //la propiedad estadoservicio se guarda en crear
-		if (obtVarios.getEstadoServicio()==1) {servicio.setTrabajador(cservicio.getTrabajador());}
-		cservicio.setEstadoservicio(es);
+		servicio.setEstadoservicio(eServicioActual); //la propiedad estadoservicio se recibe por parametro en crear
+		if (obtVarios.getEstadoServicio()==1) {  //se valida si la etapa es crear u otros
+			servicio.setTrabajador(cservicio.getTrabajador());			
+			}else {
+				cservicio.setTrabajador(servicio.getTrabajador());			
+			}		
+		controlService.save(cservicio);//grabar el registro
 		servicioService.save(servicio);
-		
-		
-		
+					
 		String mensajeFlash = (cservicio.getId() != null) ? "Servicio editado con éxito!" : "Servicio creado con éxito!";								
 	//	esServicio=estadoServicioService.findById((long) obtusuario.getTc()); //se ubica el estado del servicio por el tipo de cambio			
 									
@@ -117,7 +117,7 @@ public class ControlServicioController {
 		//controlService.save(cs);		
 		//status.setComplete();
 		//flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:/listarEstado/"+obtVarios.getEstadoServicio();
+		return "redirect:/listarEstado/"+(obtVarios.getEstadoServicio());
 	}
 	
 	@RequestMapping(value = "formControlServicio/{id}")

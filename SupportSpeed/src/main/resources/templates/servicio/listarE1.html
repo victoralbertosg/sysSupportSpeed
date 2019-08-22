@@ -7,17 +7,11 @@
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
-
-				<h4>cambio 1 ruta actual</h4>
+				<h4>Lista de Servicios</h4>
 				<h4 class="card-title">
 					<a th:href="@{/formServicio/1}" class="btn btn-primary btn-xs">Programar
 						servicios</a>
 				</h4>
-				<div th:text="@{/}" />
-
-				<div th:text="${#request.contextPath}" />
-				
-				<div>/your/context/</div>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -37,7 +31,7 @@
 							<td th:text="${servicio.cliente.razonsocial}"></td>
 							<td th:text="${servicio.estadoservicio.descripcion}"></td>
 							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/formCServicio/}+${servicio.id}+'/2'" th:text="${submint}"></a></td>
+								th:href="@{/formCServicio/}+${servicio.id}+'/'+${servicio.estadoservicio.id}" th:text="${submint}"></a></td>
 							<td><a class="btn btn-danger btn-xs"
 								th:href="@{/delete/}+${servicio.id}" th:text="'Eliminar'"
 								onclick="return confirm('estas seguro de eliminar?');"></a></td>

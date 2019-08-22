@@ -1,6 +1,6 @@
 package com.titannet.controller;
 
-import java.awt.print.Pageable;
+
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +51,6 @@ public class TrabajadorController {
 		model.addAttribute("trabajadores", trabajadores);
 		model.addAttribute("page", pageRender);
 		return "listar";
-
 	}
 
 	@GetMapping(value = "/form")
@@ -117,8 +116,7 @@ public class TrabajadorController {
 		} else {
 			flash.addFlashAttribute("error", "el ID del cliente no puede ser cero");
 			return "redirect:../listar";
-		}
-		
+		}		
 		
 		return "redirect:../listar";
 	}

@@ -22,8 +22,11 @@ INSERT INTO tiposervicios (descripcion) VALUES ('Monitoreo de Sistemas');
 
 INSERT INTO estado_servicio (descripcion, estado) VALUES ('inicio servicio', 'nuevo');
 INSERT INTO estado_servicio (descripcion, estado) VALUES ('trabajador  asignado', 'asignado');
-INSERT INTO estado_servicio (descripcion, estado) VALUES ('conformidad cliente', 'completado');
-INSERT INTO estado_servicio (descripcion, estado) VALUES ('conformidad admin', 'cerrado');
+INSERT INTO estado_servicio (descripcion, estado) VALUES ('informe trabajos realizados', 'servicio cumplido');
+INSERT INTO estado_servicio (descripcion, estado) VALUES ('conformidad del cliente', 'conformidad del cliente');
+INSERT INTO estado_servicio (descripcion, estado) VALUES ('Conformidad del Administrador', 'conformidad del administrador');
+INSERT INTO estado_servicio (descripcion, estado) VALUES ('Archivo del servicio', 'Archivado');
+
 
 INSERT INTO `bddsupport`.`clientes` (`direccion`, `razonsocial`, `rubro`) VALUES ('Sjl', 'Clinica San Juan', 'Salud');
 INSERT INTO `bddsupport`.`clientes` (`direccion`, `razonsocial`, `rubro`) VALUES ('Comas', 'Clinica San Pablo', 'Salud');
@@ -31,12 +34,13 @@ INSERT INTO `bddsupport`.`clientes` (`direccion`, `razonsocial`, `rubro`) VALUES
 INSERT INTO `bddsupport`.`clientes` (`direccion`, `razonsocial`, `rubro`) VALUES ('Cercado', 'Clinica internacional', 'Salu');
 
 /* Creamos algunos usuarios con sus roles */
-INSERT INTO `usuarios` (username, password, enabled,fk_persona) VALUES ('victor','$2a$10$O9wxmH/AeyZZzIS09Wp8YOEMvFnbRVJ8B4dmAMVSGloR62lj.yqXG',1,1);
+INSERT INTO `usuarios` (username, password, enabled,fk_persona) VALUES ('cliente','$2a$10$O9wxmH/AeyZZzIS09Wp8YOEMvFnbRVJ8B4dmAMVSGloR62lj.yqXG',1,1);
 INSERT INTO `usuarios` (username, password, enabled,fk_persona) VALUES ('admin','$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS',1,2);
+INSERT INTO `usuarios` (username, password, enabled,fk_persona) VALUES ('soporte','$2a$10$mc7NrKUnjGDH/rX8S4bKxelZkO7XNrwKp8F66hIxPBp3Py6NNku1K',1,3);
 
-INSERT INTO `roles` (fk_usuario, authority) VALUES (1,'ROLE_USER');
+INSERT INTO `roles` (fk_usuario, authority) VALUES (1,'ROLE_CLIENTE');
 INSERT INTO `roles` (fk_usuario, authority) VALUES (2,'ROLE_ADMIN');
-INSERT INTO `roles` (fk_usuario, authority) VALUES (2,'ROLE_USER');
+INSERT INTO `roles` (fk_usuario, authority) VALUES (3,'ROLE_SOPORTE');
 
 
 INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`, `fk_cliente`,`fk_trabajador`) VALUES ('2019-08-16', '2', '1','2','1');

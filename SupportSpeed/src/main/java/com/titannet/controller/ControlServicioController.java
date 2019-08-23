@@ -1,6 +1,7 @@
 package com.titannet.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.titannet.entity.ControlServicio;
 import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Servicio;
+import com.titannet.entity.Trabajador;
 import com.titannet.service.IClienteService;
 import com.titannet.service.IControlServicioService;
 import com.titannet.service.IEstadoServicioService;
@@ -133,7 +135,7 @@ public class ControlServicioController {
 			}
 		} else {
 			flash.addFlashAttribute("error", "el ID del servicio no puede ser cero");
-			return "redirect:/listarE1";
+			return "redirect:/listarEstado/"+(obtVarios.getEstadoServicio());
 		}
 		//List<Persona> personas=personaService.findAll();
 		//List<Cargo> cargos= cargoService.findAll();
@@ -142,5 +144,20 @@ public class ControlServicioController {
 	//	model.put("cargos", cargos);
 		//model.put("titulo", "editar trabajador");
 		return "/controlServicio/form";
+	}
+	
+	@GetMapping (value="verCS/{id}") 
+	public String ver(@PathVariable(value="id")Long id, Model model, RedirectAttributes flash) {
+		if (id>0) {
+			Servicio s=servicioService.findById(id);			
+			List<ControlServicio> cs= controlService.listaCServicio(s);		
+			model.addAttribute("listacontrolservicio", cs);
+			model.addAttribute("servicio",s);
+			model.addAttribute("titulo","Ver");
+		}else{
+			flash.addFlashAttribute("error", "el ID del cliente no puede ser cero");
+			return "redirect:/listarEstado/"+(obtVarios.getEstadoServicio());
+		}
+		return "/controlServicio/ver";
 	}
 }

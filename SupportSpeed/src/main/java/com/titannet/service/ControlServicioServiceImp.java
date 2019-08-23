@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.titannet.dao.IControlServicio;
 import com.titannet.entity.ControlServicio;
+import com.titannet.entity.Servicio;
 
 
 @Service
@@ -44,6 +45,11 @@ public class ControlServicioServiceImp implements IControlServicioService {
 	public void delete(ControlServicio controlservicio) {
 		controlserviciodao.delete(controlservicio);
 		
+	}
+
+	@Override
+	public List<ControlServicio> listaCServicio(Servicio servicio) {		
+		return controlserviciodao.listaCServicio(servicio);
 	}
 
 }

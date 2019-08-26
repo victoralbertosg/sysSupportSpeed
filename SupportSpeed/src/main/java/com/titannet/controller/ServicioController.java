@@ -6,11 +6,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,9 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.titannet.entity.ControlServicio;
 import com.titannet.entity.EstadoServicio;
-
+import com.titannet.entity.Persona;
 import com.titannet.entity.Servicio;
-
+import com.titannet.entity.Usuario;
 import com.titannet.service.IClienteService;
 import com.titannet.service.IControlServicioService;
 import com.titannet.service.IEstadoServicioService;
@@ -76,22 +72,29 @@ public class ServicioController {
 		return "/servicio/form";
 	}
 
-	@GetMapping(value = "/listarEstado/{parEstadoServicio}")
-				
-	public String listarE1(Model model,@PathVariable(value = "parEstadoServicio") Long parEstadoServicio ) {
+	@GetMapping(value = "/listarEstado/{parEstadoServicio}")				
+	public String listarS(Model model,@PathVariable(value = "parEstadoServicio") Long parEstadoServicio ) {
 		
-		
+		if (parEstadoServicio==null) {
+			parEstadoServicio=(long) 1;
+			};	
 		EstadoServicio estadoservicio = estadoServicioService.findById(parEstadoServicio);
-		List<Servicio> servicio = servicioService.servicioEstado1(estadoservicio);
-		
+		Usuario u=obtVarios.obtUsuario();
+		Persona p=obtVarios.obtPersonaUsuario(u);
+		List<Servicio> servicio=null;
+			
 		String submint=null;
 		if (parEstadoServicio==1) {
 			submint="Asignar personal";
+			servicio = servicioService.servicioEstado1(estadoservicio);
 		}else if (parEstadoServicio==2){
+			servicio=servicioService.servicioTrabajadorEstado(p, estadoservicio);			
 			submint="Registrar trabajos";
 		}else if (parEstadoServicio==3){
+			servicio = servicioService.servicioClienteEstado(p, estadoservicio);
 			submint="Registrar conformidad";
 		}else if (parEstadoServicio==4){
+			servicio = servicioService.servicioEstado1(estadoservicio);
 			submint="Conformidad y cierre";
 		}else {
 			
@@ -100,7 +103,7 @@ public class ServicioController {
 		model.addAttribute("submint", submint);
 		model.addAttribute("parEstadoServicio", parEstadoServicio);
 				
-		return "/servicio/listarE1";
+		return "/servicio/listarS";
 	}
 
 	@RequestMapping(value = "/formServicio", method = RequestMethod.POST)
@@ -128,4 +131,13 @@ public class ServicioController {
 		return "redirect:/listarEstado/"+obtVarios.getEstadoServicio();		
 	}
 	
+	@GetMapping(value = {"/listarServicioTrabajador"})	
+	public String listarServicioTrabajador(Model model ) {
+		
+		Usuario u=obtVarios.obtUsuario();
+		Persona p=obtVarios.obtPersonaUsuario(u);
+		List<Servicio> servicioTrabajador=servicioService.servicioTrabajador(p);
+		model.addAttribute("listaServicio", servicioTrabajador);								
+		return "/servicio/listarS";
+}
 }

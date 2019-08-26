@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.titannet.dao.IUsuarioDao;
+import com.titannet.entity.Persona;
 import com.titannet.entity.Usuario;
 import com.titannet.service.IUsuarioService;
 
@@ -55,6 +56,11 @@ public class UsuarioServiceImp implements IUsuarioService {
 	public Usuario findByUsername(String username) {
 		// TODO Auto-generated method stub
 		return usuarioDao.findByUsername(username);
+	}
+
+	@Override
+	public Persona UsuarioPersona(Long id) {	
+		return usuarioDao.UsuarioPersona(id);
 	}
 
 

@@ -15,10 +15,9 @@
 						th:text="'Datos del Servicio'"></li>
 					<li class="list-group-item" th:text="${servicio.cliente.razonsocial}"></li>
 					<li class="list-group-item" th:text="${servicio.descripcion}"></li>
-					<li class="list-group-item" th:text="${servicio.fecha}"></li>
-					<li class="list-group-item" th:text="${servicio.trabajador.persona.nombre}"></li>					
+					<li class="list-group-item" th:text="${servicio.fecha}"></li>	
+					<li class="list-group-item" th:text="${servicio.trabajador != null} ? ${servicio.trabajador.persona.nombre} : 'Trabajador no asignado!'" ></li>										
 				</ul>
-
 
 				<table class="table table-striped">
 					<thead>

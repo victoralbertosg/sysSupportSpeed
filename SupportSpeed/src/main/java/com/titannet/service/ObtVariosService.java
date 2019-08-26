@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.titannet.entity.EstadoServicio;
+import com.titannet.entity.Persona;
 import com.titannet.entity.Usuario;
 
 @Service
@@ -24,6 +25,10 @@ public class ObtVariosService {
 		Usuario usu = usuarioService.findByUsername(u);		
 		return usu;
 	}
+	public Persona obtPersonaUsuario(Usuario u) {	
+		return usuarioService.UsuarioPersona(u.getId());
+	}
+	
 	public EstadoServicio obtEstadoServicio(Long Id) {		
 		return estadoServicioService.findById(Id);
 	}

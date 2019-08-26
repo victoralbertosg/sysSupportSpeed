@@ -41,7 +41,7 @@ public class TrabajadorController {
 	@Autowired
 	ICargoService cargoService;
 
-	@RequestMapping(value = { "/listar" }, method = RequestMethod.GET)
+	@RequestMapping(value =  "/listar" , method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
 		PageRequest pageRequest = new PageRequest(page, 5);

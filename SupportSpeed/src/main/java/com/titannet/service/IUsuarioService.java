@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-
+import com.titannet.entity.Persona;
 import com.titannet.entity.Usuario;
 
 public interface IUsuarioService {
@@ -15,4 +15,5 @@ public interface IUsuarioService {
 	public Usuario findById(Long id);
 	public void delete(Usuario usuario);
 	public Usuario findByUsername(String username);
+	public Persona UsuarioPersona(Long id);
 }

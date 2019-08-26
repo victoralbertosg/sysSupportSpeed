@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.titannet.dao.IServicioDao;
 import com.titannet.entity.EstadoServicio;
+import com.titannet.entity.Persona;
 import com.titannet.entity.Servicio;
 
 
@@ -52,6 +53,21 @@ public class ServicioServiceImp implements IServicioService{
 	public List<Servicio> servicioEstado1(EstadoServicio es) {
 		// TODO Auto-generated method stub
 		return servicioDao.servicioEstado1(es);
+	}
+
+	@Override
+	public List<Servicio> servicioTrabajador(Persona persona) {		
+		return servicioDao.servicioTrabajador(persona);
+	}
+
+	@Override
+	public List<Servicio> servicioTrabajadorEstado(Persona persona, EstadoServicio estadoServicio) {		
+		return servicioDao.servicioTrabajadorEstado(persona, estadoServicio);
+	}
+
+	@Override
+	public List<Servicio> servicioClienteEstado(Persona persona, EstadoServicio es) {
+		return servicioDao.servicioClienteEstado(persona, es);
 	}
 
 }

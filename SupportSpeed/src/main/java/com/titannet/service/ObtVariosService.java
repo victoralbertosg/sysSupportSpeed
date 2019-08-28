@@ -1,5 +1,7 @@
 package com.titannet.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +20,7 @@ public class ObtVariosService {
 	@Autowired
 	IEstadoServicioService estadoServicioService;
 	private Long estadoServicio;	
-	private String logCambio;
+	private String logCambio;	
 	public Usuario obtUsuario() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetail = (UserDetails) auth.getPrincipal();
@@ -26,11 +28,11 @@ public class ObtVariosService {
 		Usuario usu = usuarioService.findByUsername(u);		
 		return usu;
 	}
-	public Role obtRol (Usuario u) {
-		
-		
-		return null;
+	public String obtRol (Usuario u) {
+		List<Role> r=u.getRoles();		
+		return r.get(0).getAuthority();		
 	}
+	
 	public Persona obtPersonaUsuario(Usuario u) {	
 		return usuarioService.UsuarioPersona(u.getId());
 	}

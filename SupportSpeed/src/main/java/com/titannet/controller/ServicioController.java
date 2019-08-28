@@ -57,6 +57,7 @@ public class ServicioController {
 	IControlServicioService controlService;
 //public Integer tc; //tipo de cambio 1:crear 2:asignar personal 3: conformidad cliene 4;conformidad administrador
 	public EstadoServicio esServicio;
+	public Cliente micliente;
 	
 	//@PreAuthorize(value = "hasRole('ROLE_ADMIN';'ROLE_CLIENTE')")
 	//@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENTE')")
@@ -69,13 +70,13 @@ public class ServicioController {
 		//identificar si el que va a crear es un cliente
 		Usuario u=obtVarios.obtUsuario();
 		Persona p=obtVarios.obtPersonaUsuario(u);
-		Cliente c=clienteService.findByPersona(p);
+		micliente=clienteService.findByPersona(p);
 		String t=null;
-		if (c!=null) {
+		if (micliente!=null) {
 			t="true";
-		}
-		
-		model.addAttribute("micliente", c);
+			servicio.setCliente(micliente);
+		}		
+		model.addAttribute("micliente", micliente);
 		model.addAttribute("isCliente", t);
 		model.addAttribute("servicio", servicio);
 		model.addAttribute("tipoServicios", tipoServicioService.findAll());
@@ -110,7 +111,8 @@ public class ServicioController {
 			servicio = servicioService.servicioEstado1(estadoservicio);
 			submint="Conformidad y cierre";
 		}else {
-			
+			servicio = servicioService.servicioEstado1(estadoservicio);
+			submint="";
 		}
 		model.addAttribute("listaServicio", servicio);
 		model.addAttribute("submint", submint);
@@ -130,6 +132,7 @@ public class ServicioController {
 		esServicio=obtVarios.obtEstadoServicio(obtVarios.getEstadoServicio()); //se ubica el estado del servicio por el tipo de cambio			
 									
 		servicio.setEstadoservicio(esServicio);
+		if (servicio.getCliente()==null) { servicio.setCliente(micliente);}
 		servicioService.save(servicio);
 		//actualizar control servicio
 		ControlServicio cs = new ControlServicio();
@@ -141,7 +144,17 @@ public class ServicioController {
 		controlService.save(cs);		
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:/listarEstado/"+obtVarios.getEstadoServicio();		
+		
+		//listar segun rol despues de grabar
+		String rol =obtVarios.obtRol(obtVarios.obtUsuario());
+		String estado=null;
+		if (rol.equals("ROLE_ADMIN")) {
+				estado="1";	
+		}else  if (rol.equals("ROLE_CLIENTE")) {
+			estado="3";
+		}
+		
+		return "redirect:/listarEstado/"+estado;		
 	}
 	
 	@GetMapping(value = {"/listarServicioTrabajador"})	

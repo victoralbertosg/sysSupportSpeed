@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Persona;
+import com.titannet.entity.Role;
 import com.titannet.entity.Usuario;
 
 @Service
@@ -24,6 +25,11 @@ public class ObtVariosService {
 		String u = userDetail.getUsername();
 		Usuario usu = usuarioService.findByUsername(u);		
 		return usu;
+	}
+	public Role obtRol (Usuario u) {
+		
+		
+		return null;
 	}
 	public Persona obtPersonaUsuario(Usuario u) {	
 		return usuarioService.UsuarioPersona(u.getId());

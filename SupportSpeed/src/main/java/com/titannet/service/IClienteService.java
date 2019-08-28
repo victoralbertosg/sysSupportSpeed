@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 
 import com.titannet.entity.Cliente;
+import com.titannet.entity.Persona;
 
 
 
@@ -16,4 +17,5 @@ public interface IClienteService {
 	public void save(Cliente cliente);
 	public Cliente findById(Long id);
 	public void delete(Cliente cliente);
+	public Cliente findByPersona(Persona persona);
 }

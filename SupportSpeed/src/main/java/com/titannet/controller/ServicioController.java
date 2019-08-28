@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.titannet.entity.Cliente;
 import com.titannet.entity.ControlServicio;
 import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Persona;
@@ -65,11 +65,24 @@ public class ServicioController {
 		Servicio servicio = new Servicio();			
 		obtVarios.setEstadoServicio(parEstadoServicio); //se agrega el valor de 1 al tipo de cambio q corresponde a crear
 		obtVarios.setLogCambio(obtVarios.obtEstadoServicio(parEstadoServicio).getDescripcion()); //se agrega la descripcion de cambio 
+		
+		//identificar si el que va a crear es un cliente
+		Usuario u=obtVarios.obtUsuario();
+		Persona p=obtVarios.obtPersonaUsuario(u);
+		Cliente c=clienteService.findByPersona(p);
+		String t=null;
+		if (c!=null) {
+			t="true";
+		}
+		
+		model.addAttribute("micliente", c);
+		model.addAttribute("isCliente", t);
 		model.addAttribute("servicio", servicio);
 		model.addAttribute("tipoServicios", tipoServicioService.findAll());
 		model.addAttribute("clientes", clienteService.findAll());
 		model.addAttribute("titulo", "Formulario Servicio");	
 		return "/servicio/form";
+		
 	}
 
 	@GetMapping(value = "/listarEstado/{parEstadoServicio}")				

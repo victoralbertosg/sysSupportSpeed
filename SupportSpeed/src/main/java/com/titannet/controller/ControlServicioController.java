@@ -42,10 +42,8 @@ public class ControlServicioController {
 	IEstadoServicioService estadoServicioService;
 	@Autowired
 	IClienteService clienteService;
-
 	@Autowired
 	IUsuarioService usuarioService;
-
 	@Autowired
 	IControlServicioService controlService;
 	@Autowired

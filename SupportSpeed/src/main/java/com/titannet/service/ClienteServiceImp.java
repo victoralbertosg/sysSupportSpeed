@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.titannet.dao.IClienteDao;
 import com.titannet.entity.Cliente;
+import com.titannet.entity.Persona;
+
+
 
 @Service
 public class ClienteServiceImp implements IClienteService {
@@ -41,5 +44,13 @@ public class ClienteServiceImp implements IClienteService {
 	public void delete(Cliente cliente) {
 		clientedao.delete(cliente);		
 	}
+
+	@Override
+	public Cliente findByPersona(Persona persona) {
+		
+		return clientedao.findByPersona(persona);
+	}
+
+
 	
 }

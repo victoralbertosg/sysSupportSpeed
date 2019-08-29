@@ -19,8 +19,8 @@
 							<th>Tipo Servicio</th>
 							<th>Cliente</th>
 							<th>estado</th>
-							<th>EDITAR</th>
-							<th>ELIMINAR</th>
+							<th>ACCION</th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -32,9 +32,7 @@
 							<td th:text="${servicio.estadoservicio.descripcion}"></td>
 							<td><a class="btn btn-primary btn-xs"
 								th:href="@{/formCServicio/}+${servicio.id}+'/'+${servicio.estadoservicio.id}" th:text="${submint}"></a></td>
-							<td><a class="btn btn-danger btn-xs"
-								th:href="@{/delete/}+${servicio.id}" th:text="'Eliminar'"
-								onclick="return confirm('estas seguro de eliminar?');"></a></td>
+							
 						</tr>
 					</tbody>
 				</table>				

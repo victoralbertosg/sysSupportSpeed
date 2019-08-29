@@ -21,7 +21,7 @@
 					<label for="servicio" class="col-sm-2 col-form-label">Servicio
 						Solicitado</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{miservicio.descripcion}"
+						<input type="text" th:readonly=true th:field="*{miservicio.descripcion}"
 							class="form-control" th:errorclass="'form-control alert-danger'" />
 						<small class="form-text text-danger"
 							th:if="${#fields.hasErrors('miservicio.descripcion')}"
@@ -31,7 +31,7 @@
 				<div class="form-group row">
 					<label for="cliente" class="col-sm-2 col-form-label">Cliente</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{miservicio.cliente.razonsocial}"
+						<input type="text" th:readonly=true th:field="*{miservicio.cliente.razonsocial}"
 							class="form-control" th:errorclass="'form-control alert-danger'" />
 						<small class="form-text text-danger"
 							th:if="${#fields.hasErrors('miservicio.cliente.razonsocial')}"
@@ -42,7 +42,7 @@
 					<label for="fecha" class="col-sm-2 col-form-label">Fecha de
 						solicitud</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{miservicio.fecha}"
+						<input type="text" th:readonly=true th:field="*{miservicio.fecha}"
 							class="form-control" th:errorclass="'form-control alert-danger'" />
 						<small class="form-text text-danger"
 							th:if="${#fields.hasErrors('miservicio.fecha')}"
@@ -52,7 +52,7 @@
 				<div th:if="${parES != 'nuevo'}"class="form-group row">
 					<label for="Trabajador" class="col-sm-2 col-form-label">Personal Asignado</label>
 					<div class="col-sm-6">
-						<input type="text" th:field="*{miservicio.trabajador.persona.nombre}"
+						<input type="text" th:readonly=true th:field="*{miservicio.trabajador.persona.nombre}"
 							class="form-control" th:errorclass="'form-control alert-danger'" />
 						<small class="form-text text-danger"
 							th:if="${#fields.hasErrors('miservicio.trabajador')}"
@@ -68,7 +68,7 @@
 							Trabajador a Asignar</label>
 						<div  class="col-sm-6">
 						
-							<select th:field="*{trabajador}" multiple="multiple">
+							<select required th:field="*{trabajador}" multiple="multiple">
 								<option th:each="t :${trabajadores}" th:value="${t.Id}"
 									th:text="${t.persona.nombre}"></option>
 							</select> <small class="form-text text-danger"
@@ -80,7 +80,7 @@
 						<label for="Descripcion" class="col-sm-2 col-form-label">Detalle
 							de cambio</label>
 						<div class="col-sm-6">
-							<input type="text" th:field="*{descripcion}" class="form-control"
+							<input type="text" required th:field="*{descripcion}" class="form-control"
 								th:errorclass="'form-control alert-danger'" /> <small
 								class="form-text text-danger"
 								th:if="${#fields.hasErrors('descripcion')}"

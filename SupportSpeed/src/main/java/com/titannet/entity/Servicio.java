@@ -54,7 +54,7 @@ public class Servicio implements Serializable{
 	@Temporal(TemporalType.DATE)	
 	private Date fecha;
 	
-	@NotEmpty
+
 	private String descripcion;
 	
 	@PrePersist

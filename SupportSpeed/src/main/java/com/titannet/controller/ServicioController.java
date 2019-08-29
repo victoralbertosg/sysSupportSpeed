@@ -126,7 +126,8 @@ public class ServicioController {
 			SessionStatus status, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de Servicios");
-			return "formServicio";
+			
+			return  "/servicio/form";
 		}
 		String mensajeFlash = (servicio.getId() != null) ? "Servicio editado con éxito!" : "Servicio creado con éxito!";								
 		esServicio=obtVarios.obtEstadoServicio(obtVarios.getEstadoServicio()); //se ubica el estado del servicio por el tipo de cambio			

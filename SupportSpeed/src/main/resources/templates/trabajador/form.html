@@ -22,10 +22,11 @@
 					<div class="form-group row">
 						<label for="Personal" class="col-sm-2 col-form-label">Personal</label>
 						<div class="col-sm-6">
-							<select th:field="*{persona}" multiple="multiple">
+							<select required th:field="*{persona}" multiple="multiple">
 								<option th:each="persona :${personas}" th:value="${persona.Id}"
 									th:text="${persona.nombre}"></option>
-							</select> <small class="form-text text-danger"
+							</select>
+							 <small class="form-text text-danger"
 								th:if="${#fields.hasErrors('persona')}" th:errors="*{persona}"></small>
 						</div>
 					</div>
@@ -33,10 +34,11 @@
 					<div class="form-group row">
 						<label for="Cargo" class="col-sm-2 col-form-label">Cargos</label>
 						<div class="col-sm-6">
-							<select th:field="*{cargo}" multiple="multiple">
+							<select required th:field="*{cargo}" multiple="multiple">
 								<option th:each="cargo :${cargos}" th:value="${cargo.Id}"
 									th:text="${cargo.cargo}"></option>
-							</select> <small class="form-text text-danger"
+							</select> 
+							<small class="form-text text-danger"
 								th:if="${#fields.hasErrors('cargo')}" th:errors="*{cargo}"></small>
 						</div>
 					</div>

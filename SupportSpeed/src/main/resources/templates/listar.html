@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout::head"></head>
 <body>
 	<header th:replace="layout/layout:: header"></header>
@@ -20,8 +20,8 @@
 							<th>nombre</th>
 							<th>apellido</th>
 							<th>Cargo</th>
-							<th>EDITAR</th>
-							<th>ELIMINAR</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">EDITAR</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">ELIMINAR</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -31,9 +31,9 @@
 							<td th:text="${trabajador.persona.nombre}"></td>
 							<td th:text="${trabajador.persona.apellido}"></td>
 							<td th:text="${trabajador.cargo.cargo}"></td>
-							<td><a class="btn btn-primary btn-xs"
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs"
 								th:href="@{/form/}+${trabajador.id}" th:text="'editar'"></a></td>
-							<td><a class="btn btn-danger btn-xs"
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs"
 								th:href="@{/delete/}+${trabajador.id}" th:text="'Eliminar'"
 								onclick="return confirm('estas seguro de eliminar?');"></a></td>
 						</tr>

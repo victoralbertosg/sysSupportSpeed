@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,7 +24,7 @@ public class Trabajador implements Serializable {
 	private Long Id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="fk_persona")
+	@JoinColumn(name="fk_persona")	
 	private Persona persona;	
 	
 	private Date Fecha_inicio;	

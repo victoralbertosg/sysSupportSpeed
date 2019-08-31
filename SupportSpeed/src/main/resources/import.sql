@@ -59,6 +59,7 @@ INSERT INTO `roles` (fk_usuario, authority) VALUES (7,'ROLE_CLIENTE');
 INSERT INTO `roles` (fk_usuario, authority) VALUES (8,'ROLE_CLIENTE');
 
 
+
 INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`, `fk_cliente`,`fk_trabajador`,descripcion) VALUES ('2019-08-16', '2', '1','2','1','se solicita mantenimiento de pcs');
 INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`, `fk_cliente`,`fk_trabajador`,descripcion) VALUES ('2019-08-16', '2', '2','1','2','se solicita monitoreo de sistemas');
 INSERT INTO servicios (`fecha`, `fk_estadoservicio`, `fk_tiposervicio`, `fk_cliente`,`fk_trabajador`,descripcion) VALUES ('2019-08-16', '3', '2','3','3','se solicita mantenimiento de cableado');

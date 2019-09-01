@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.titannet.entity.ControlServicio;
 import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Servicio;
+import com.titannet.entity.Trabajador;
 import com.titannet.service.IClienteService;
 import com.titannet.service.IControlServicioService;
 import com.titannet.service.IEstadoServicioService;
@@ -64,7 +65,15 @@ public class ControlServicioController {
 		} else {
 			flash.addFlashAttribute("error", "el ID del servicio no puede ser cero");
 			return "redirect:/listarE1";
-		}		
+		}
+	//filtro trabajadores de soporte
+	/*	for(Trabajador trabajador : trabajadorService.findAll()){
+			if (trabajador.getCargo.getId==1) {
+				List<Trabajador> trabajadores;
+				
+			}
+		}*/
+		
 		cservicio.setServicio(servicio);			
 		model.addAttribute("parES",servicio.getEstadoservicio().getEstado());
 		model.addAttribute("miservicio", servicio);

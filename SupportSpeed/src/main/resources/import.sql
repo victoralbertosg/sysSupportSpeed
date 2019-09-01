@@ -50,14 +50,14 @@ INSERT INTO `bddsupport`.`clientes` (id,`direccion`, `razonsocial`, `rubro`,fk_p
 
 
 /* Creamos algunos usuarios con sus roles */
-INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (1,'cliente1','$2a$10$O9wxmH/AeyZZzIS09Wp8YOEMvFnbRVJ8B4dmAMVSGloR62lj.yqXG',1,1);
+INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (1,'sanjuan','$2a$10$O9wxmH/AeyZZzIS09Wp8YOEMvFnbRVJ8B4dmAMVSGloR62lj.yqXG',1,1);
 INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (2,'admin','$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS',1,2);
-INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (3,'soporte1','$2a$10$mc7NrKUnjGDH/rX8S4bKxelZkO7XNrwKp8F66hIxPBp3Py6NNku1K',1,3);
-INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (4,'soporte2','$2a$10$rmxRgCXl2rOIyGY5vivWCe4r0GuIYdVkhE8IlsNCaoneKjHdJB4O.',1,4);
-INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (5,'soporte3','$2a$10$xnGs.DiHewUsbrGC15UJi.96HjIKVo/UuP2GMmEHFSDqgAuUbXieu',1,5);
-INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (6,'soporte4','$2a$10$9kE7cDjzm7ouAyiQv956zu2w4PYquOnMCn4vmaNWBye8g5izNxjom',1,6);
-INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (7,'cliente2','$2a$10$FYmX5qY6EPHz/ABAkUkgzeaBogpF87Of7nPpEpaRUR8afWg.L9zge',1,7);
-INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (8,'cliente3','$2a$10$mEy5YwGg6/iWWALHJN4HOudPRN3lI/zhEHMYP.F1VKB54jd3pXMP.',1,8);
+INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (3,'jhoni','$2a$10$mc7NrKUnjGDH/rX8S4bKxelZkO7XNrwKp8F66hIxPBp3Py6NNku1K',1,3);
+INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (4,'jose','$2a$10$rmxRgCXl2rOIyGY5vivWCe4r0GuIYdVkhE8IlsNCaoneKjHdJB4O.',1,4);
+INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (5,'manuel','$2a$10$xnGs.DiHewUsbrGC15UJi.96HjIKVo/UuP2GMmEHFSDqgAuUbXieu',1,5);
+INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (6,'daniel','$2a$10$9kE7cDjzm7ouAyiQv956zu2w4PYquOnMCn4vmaNWBye8g5izNxjom',1,6);
+INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (7,'sanpablo','$2a$10$FYmX5qY6EPHz/ABAkUkgzeaBogpF87Of7nPpEpaRUR8afWg.L9zge',1,7);
+INSERT INTO `bddsupport`.`usuarios` (id,username, password, enabled,fk_persona) VALUES (8,'jujomi','$2a$10$mEy5YwGg6/iWWALHJN4HOudPRN3lI/zhEHMYP.F1VKB54jd3pXMP.',1,8);
 
 
 

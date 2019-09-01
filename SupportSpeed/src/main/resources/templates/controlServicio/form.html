@@ -66,8 +66,7 @@
 					<div class="form-group row" th:if="${parES == 'nuevo'}" >					
 						<label for="trabajadores" class="col-sm-2 col-form-label">Seleccione
 							Trabajador a Asignar</label>
-						<div  class="col-sm-6">
-						
+						<div  class="col-sm-6">						
 							<select required th:field="*{trabajador}" multiple="multiple">
 								<option th:each="t :${trabajadores}" th:value="${t.Id}"
 									th:text="${t.persona.nombre}"></option>

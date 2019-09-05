@@ -28,6 +28,7 @@ public class Trabajador implements Serializable {
 	private Persona persona;	
 	
 	private Date Fecha_inicio;	
+	
 	@OneToMany( mappedBy="trabajador",fetch = FetchType.LAZY, cascade = CascadeType.ALL)	
 	private List<Servicio> listaserviciotrabajador;
 

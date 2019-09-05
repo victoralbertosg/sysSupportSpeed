@@ -30,6 +30,8 @@ INSERT INTO `heroku_5f6fa6440c4b697`.`trabajadores` (id,`fk_cargo`, `fk_persona`
 
 
 
+
+
 INSERT INTO `heroku_5f6fa6440c4b697`.tiposervicios (id,descripcion) VALUES (1,'Soporte');
 INSERT INTO `heroku_5f6fa6440c4b697`.tiposervicios (id,descripcion) VALUES (2,'Mantenimiento de redes');
 INSERT INTO `heroku_5f6fa6440c4b697`.tiposervicios (id,descripcion) VALUES (3,'Monitoreo de Sistemas');

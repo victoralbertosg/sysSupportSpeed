@@ -32,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @SessionAttributes("trabajadorSession")
+@RequestMapping("/unfv-supportspeed.herokuapp.com")
 public class TrabajadorController {
 
 	@Autowired(required = true)

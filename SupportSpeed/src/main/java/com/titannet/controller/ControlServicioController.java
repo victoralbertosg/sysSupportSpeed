@@ -30,6 +30,7 @@ import com.titannet.service.IUsuarioService;
 import com.titannet.service.ObtVariosService;
 
 @Controller
+@RequestMapping("/unfv-supportspeed.herokuapp.com")
 public class ControlServicioController {
 	
 	@Autowired

@@ -29,7 +29,8 @@ public class LoginController {
 			flash.addFlashAttribute("info", "Ya ha inciado sesión anteriormente");
 			String rol =obtvarios.obtRol(obtvarios.obtUsuario());
 			if (rol.equals("ROLE_ADMIN")) {
-				return "redirect:/listarEstado/1";	
+				//return "redirect:/listarEstado/1";	
+				return "redirect:/unfv-supportspeed.herokuapp.com/listarEstado/1";				
 			}else  if (rol.equals("ROLE_CLIENTE")) {
 				return "redirect:/listarEstado/3";
 			}else {

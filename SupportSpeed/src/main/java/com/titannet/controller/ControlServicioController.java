@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.titannet.entity.ControlServicio;
 import com.titannet.entity.EstadoServicio;
 import com.titannet.entity.Servicio;
-import com.titannet.entity.Trabajador;
 import com.titannet.service.IClienteService;
 import com.titannet.service.IControlServicioService;
 import com.titannet.service.IEstadoServicioService;
@@ -30,7 +29,6 @@ import com.titannet.service.IUsuarioService;
 import com.titannet.service.ObtVariosService;
 
 @Controller
-@RequestMapping("/unfv-supportspeed.herokuapp.com")
 public class ControlServicioController {
 	
 	@Autowired

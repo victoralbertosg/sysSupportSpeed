@@ -118,7 +118,7 @@ public class ServicioController {
 		model.addAttribute("submint", submint);
 		model.addAttribute("parEstadoServicio", parEstadoServicio);
 				
-		return "/servicio/listarS";
+		return "servicio/listarS";
 	}
 
 	@RequestMapping(value = "/formServicio", method = RequestMethod.POST)

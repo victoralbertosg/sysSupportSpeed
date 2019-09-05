@@ -80,7 +80,7 @@ public class ControlServicioController {
 		model.addAttribute("trabajadores", trabajadorService.findAll());
 		model.addAttribute("titulo", "Mantenimiento Control de Servicio");
 		// servicio.setEstadoservicio(1);
-		return "/controlServicio/form";
+		return "controlServicio/form";
 	}
 	@RequestMapping(value = "/formCServicio", method = RequestMethod.POST)
 	public String guardar(@Valid ControlServicio cservicio, BindingResult result, RedirectAttributes flash,
@@ -147,7 +147,7 @@ public class ControlServicioController {
 		//model.put("personas",personas);
 	//	model.put("cargos", cargos);
 		//model.put("titulo", "editar trabajador");
-		return "/controlServicio/form";
+		return "controlServicio/form";
 	}
 	
 	@GetMapping (value="verCS/{id}") 
@@ -162,6 +162,6 @@ public class ControlServicioController {
 			flash.addFlashAttribute("error", "el ID del cliente no puede ser cero");
 			return "redirect:/listarEstado/"+(obtVarios.getEstadoServicio());
 		}
-		return "/controlServicio/ver";
+		return "controlServicio/ver";
 	}
 }

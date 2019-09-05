@@ -62,7 +62,7 @@ public class TrabajadorController {
 		model.addAttribute("personas", personas);
 		model.addAttribute("cargos", cargos);
 		model.addAttribute("titulo", "Crear Trabajador");
-		return "/trabajador/form";
+		return "trabajador/form";
 	}
 
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
@@ -100,7 +100,7 @@ public class TrabajadorController {
 		model.put("personas",personas);
 		model.put("cargos", cargos);
 		model.put("titulo", "editar trabajador");
-		return "/trabajador/form";
+		return "trabajador/form";
 	}
 	@RequestMapping(value="delete/{id}")
 	public String delete (@PathVariable(value="id") Long id, RedirectAttributes flash) {
@@ -130,6 +130,6 @@ public class TrabajadorController {
 			flash.addFlashAttribute("error", "el ID del cliente no puede ser cero");
 			return "redirect:../listar";
 		}
-		return "/trabajador/ver";
+		return "trabajador/ver";
 	}
 }

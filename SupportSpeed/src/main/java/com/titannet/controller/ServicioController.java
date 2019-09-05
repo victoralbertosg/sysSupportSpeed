@@ -82,7 +82,7 @@ public class ServicioController {
 		model.addAttribute("tipoServicios", tipoServicioService.findAll());
 		model.addAttribute("clientes", clienteService.findAll());
 		model.addAttribute("titulo", "Formulario Servicio");	
-		return "/servicio/form";
+		return "servicio/form";
 		
 	}
 
@@ -127,7 +127,7 @@ public class ServicioController {
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de Servicios");
 			
-			return  "/servicio/form";
+			return  "servicio/form";
 		}
 		String mensajeFlash = (servicio.getId() != null) ? "Servicio editado con éxito!" : "Servicio creado con éxito!";								
 		esServicio=obtVarios.obtEstadoServicio(obtVarios.getEstadoServicio()); //se ubica el estado del servicio por el tipo de cambio			
@@ -165,6 +165,6 @@ public class ServicioController {
 		Persona p=obtVarios.obtPersonaUsuario(u);
 		List<Servicio> servicioTrabajador=servicioService.servicioTrabajador(p);
 		model.addAttribute("listaServicio", servicioTrabajador);								
-		return "/servicio/listarS";
+		return "servicio/listarS";
 }
 }
